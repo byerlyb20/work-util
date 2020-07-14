@@ -141,5 +141,6 @@ cython_debug/
 data/
 out/
 
-# Development Environment Prefs
+# Development & System Environment Files
 .vscode/
+.DS_Store

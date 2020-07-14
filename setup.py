@@ -6,7 +6,8 @@ setuptools.setup(
     author="Brigham Byerly",
     description="A collection of utilities for handling invoice and statement data",
     packages=[
-        'util_pkg'
+        'util_pkg',
+        'spiders'
     ],
     python_requires='>=3.6',
 )

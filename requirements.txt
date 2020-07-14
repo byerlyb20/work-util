@@ -1,2 +1,4 @@
 parsel
-git+https://github.com/harelba/q.git@b9f59cbfc261ac62993944e0120d1abace497936#egg=q
+# Installation fails when running setup script, /bin must be copied manually
+#git+https://github.com/harelba/q.git@b9f59cbfc261ac62993944e0120d1abace497936#egg=q
+scrapy
