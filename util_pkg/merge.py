@@ -1,5 +1,9 @@
-import sys, workutil, argparse
+import argparse
+import sys
+import workutil
+
 import q
+
 
 def build_select_list(statement):
     # Build a SELECT table list, combining analogous fields with the coalesce function
@@ -21,9 +25,11 @@ def build_select_list(statement):
             select_cols += field
     return select_cols
 
+
 def build_query(select_cols, key_a, key_b, file_a, file_b):
     # Build the SQLite query
-    # Since SQLite does not support FULL OUTER JOIN, we immitate the functionality by combining two LEFT OUTER JOIN operations as follows
+    # Since SQLite does not support FULL OUTER JOIN, we immitate the functionality by combining two LEFT OUTER JOIN
+    # operations as follows
     query_merge = f"""SELECT {select_cols}
     FROM {file_a} AS a
         LEFT JOIN {file_b} AS b
@@ -36,11 +42,14 @@ def build_query(select_cols, key_a, key_b, file_a, file_b):
     WHERE a.{key_a} IS NULL"""
     return query_merge
 
+
 def cleanse_input(string):
     return contains_any(string, [' ', '(', ')'])
 
+
 def contains_any(string, set):
     return True in [c in string for c in set]
+
 
 def run_standalone():
     arg_parser = argparse.ArgumentParser(description='Merge two CSV files against an equivalent key column.')
@@ -48,8 +57,11 @@ def run_standalone():
     arg_parser.add_argument('-B', dest='file_in_b', required=True, help='file B to merge')
     arg_parser.add_argument('--key-a', dest='key_a', required=True, help='key column to compare against in file A')
     arg_parser.add_argument('--key-b', dest='key_b', required=True, help='key column to compare against in file B')
-    arg_parser.add_argument('-O', dest='file_out', nargs='?', type=argparse.FileType('w'), default=workutil.gen_out_filename('mg'), help='output csv file')
-    arg_parser.add_argument('-F', dest='field_statement', help='statement of output fields with analogous fields separated by equal signs and non-analogous fields separated by commas')
+    arg_parser.add_argument('-O', dest='file_out', nargs='?', type=argparse.FileType('w'),
+                            default=workutil.gen_out_filename('mg'), help='output csv file')
+    arg_parser.add_argument('-F', dest='field_statement',
+                            help='statement of output fields with analogous fields separated by equal signs and '
+                                 'non-analogous fields separated by commas')
     arg_parser.add_argument('-V', dest='verbose', action='store_true', help='print SQLite query')
 
     args = arg_parser.parse_args()
@@ -78,6 +90,7 @@ def run_standalone():
     with args.file_out as outfile:
         q_output_printer.print_output(outfile, sys.stderr, q_output)
         print(f'All done! Merged output written to {args.file_out.name}')
+
 
 if __name__ == '__main__':
     run_standalone()
