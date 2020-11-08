@@ -73,9 +73,7 @@ def run_standalone():
     query_merge = build_query(select_list, args.key_a, args.key_b, args.file_in_a, args.file_in_b)
 
     if args.verbose:
-        print()
-        print('Here is the SQL query: ')
-        print()
+        print('\nHere is the SQL query: \n')
         print(query_merge)
         print()
 
