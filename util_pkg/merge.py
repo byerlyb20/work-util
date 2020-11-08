@@ -2,7 +2,7 @@ import argparse
 import sys
 import workutil
 
-import q
+from q import q
 
 
 def build_select_list(statement):
