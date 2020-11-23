@@ -9,7 +9,7 @@ def gen_out_filename(util_name, extension='.csv'):
 
 def run_standalone():
     if len(sys.argv) <= 1:
-        print("usage: workutil.py [list2csv|merge]")
+        print("usage: workutil.py [list2csv|merge|rname]")
         return
 
     command = sys.argv[1]
@@ -25,6 +25,9 @@ def run_standalone():
     elif command == 'merge':
         import merge
         merge.run_standalone()
+    elif command == 'rname':
+        import rname
+        rname.run_standalone()
 
 
 if __name__ == '__main__':
